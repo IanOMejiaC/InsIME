@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="Icon" href="img/logo_fesc.png">
     <link rel="stylesheet" href="css/designe.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
@@ -19,17 +20,20 @@
     <!--Barra de navegacion-->
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav justify-content-end ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#" aria-disabled="true">Inscripcion</a>
+                        <a class="nav-link" href="menu_student.html" aria-disabled="true">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" id="schedules" aria-disabled="true">Horarios</a>
+                        <a class="nav-link" href="inscripcion.html" aria-disabled="true">Inscripcion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="horarios.html" id="schedules" aria-disabled="true">Horarios</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" data-toggle="modal" data-target="#help-window"
@@ -75,26 +79,23 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Regresar</button>
-                    <button type="button" class="btn btn-primary" id="logout-btn">Cerrar sesion</button>
+                    <button type="button" class="btn btn-primary" id="logout-btn">Cerrar sesión</button>
                 </div>
             </div>
         </div>
     </div>
     <!--Contenido Principal-->
-    <div class="container">
+    <div class="container offset-md-1">
         <div class="row">
-            <div class="col offset-md-1">
+            <div class="col">
                 <h4 id="title_admin"></h4>
                 <br>
             </div>
         </div>
-    </div>
-    <!--Presentacion-->
-    <div class="cotainer">
+        <!--Presentacion-->
         <div class="row">
-            <div class="col offset-md-1">
-                <ul id="info_user">
-                </ul>
+            <div class="col mt-4">
+                <ul id="info_user"></ul>
             </div>
         </div>
     </div>
@@ -102,7 +103,7 @@
     <div class="row">
         <div class="col-sm-12" style="color:white;">
             <br>
-            <h1> Espaciado discreto jajaja XD</h1>
+            <h1> Espaciado discreto</h1>
         </div>
     </div>
     <!--Footer con informacion-->
@@ -114,7 +115,7 @@
     </div>
     <div class="copy-right">
         <div class="container">
-            <p>© 2019 UNAM. Todos los derechos reservados | Rodrigo Hernández Olguín.</p>
+            <p>© 2019 UNAM. Todos los derechos reservados | Facultad de Estudios Superiores Cuautitlán</p>
         </div>
     </div>
     <!--Scripts de firebase-->

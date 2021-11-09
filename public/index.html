@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="Icon" href="img/logo_fesc.png">
     <link rel="stylesheet" href="css/designe.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <title>Inicio :) *999999 PLIS Rorro bb</title>
+    <title>Inicio</title>
 </head>
 
 <body>
@@ -16,11 +17,27 @@
         <p align="left"><a href="index.html"><img src="img/logounam.png" alt="UNAM" width="424" height="130" border="0"
                     longdesc="LOGOUNAM"></a></p>
     </div>
+    <!--navbar-->
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <ul class="navbar-nav justify-content-end ml-auto">
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle active" data-toggle="dropdown" data-target="desplegable">
+                    Registarme
+                </a>
+                <div class="dropdown-menu">
+                    <a href="register_students.html" class="dropdown-item">Soy estudiante</a>
+                    <a href="register_teachers.html" class="dropdown-item">Soy profesor</a>
+                </div>
+            </li>
+            </ul>
+        </nav>
+    </div>
     <!--Contenido Principal-->
     <div class="container">
         <div class="row">
             <div class="col offset-md-1">
-                <h4>Bienvenido inicia sesion para continuar </h4>
+                <h4>Bienvenido inicia sesion para continuar</h4>
                 <br>
             </div>
         </div>
@@ -32,19 +49,19 @@
                 <div class="bd-example">
                     <form id="login-form">
                         <div class="form-group">
-                            <label for="InputEmail1">Correo electronico</label>
+                            <label for="InputEmail1"><span class="nf-fa-user_circle_o"></span> Correo electronico</label>
                             <input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp"
                                 placeholder="example@mail.com" required>
                             <small id="emailHelp" class="form-text text-muted">La universidad no comparte tu informacion
                                 con terceros</small>
                         </div>
                         <div class="form-group">
-                            <label for="InputPassword1">Contraseña</label>
+                            <label for="InputPassword1"><span class="nf-fa-user_circle_o"></span> Contraseña</label>
                             <input type="password" class="form-control" id="InputPassword1" placeholder="Contraseña" required>
                         </div>
                         <button type="submit" class="btn btn-primary btn-block" id="sing_in_button">Iniciar
                             sesion</button>
-                        <p class="text-center"><a href="#">Olvide mi contraseña</a></p>
+                        <p class="text-center"><a href="#" id="form_recover_password">Olvide mi contraseña</a></p>
                     </form>
                 </div>
             </div>
@@ -55,7 +72,7 @@
     <div class="row">
         <div class="col-sm-12" style="color:white;">
             <br>
-            <h1> Espaciado discreto jajaja XD</h1>
+            <h1> UNAM - FESC XD</h1>
         </div>
     </div>
     <!--Footer con informacion-->
@@ -67,7 +84,7 @@
     </div>
     <div class="copy-right">
         <div class="container">
-            <p>© 2019 UNAM. Todos los derechos reservados | Rodrigo Hernández Olguín.</p>
+            <p>© 2019 UNAM. Todos los derechos reservados | Facultad de Estudios Superiores Cuautitlán.</p>
         </div>
     </div>
     <!--Scripts de firebase-->

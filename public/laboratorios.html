@@ -4,10 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="Icon" href="img/logo_fesc.png">
     <link rel="stylesheet" href="css/designe.css">
+    <link rel="stylesheet" href="css/designe_crud.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <title>Inicio</title>
+    <title>Laboratorios</title>
 </head>
 
 <body class="bod">
@@ -15,7 +17,7 @@
     <div class="container-fluid" style="Background-color:#003366;">
         <p align="left"><a href="index.html"><img src="img/logounam.png" alt="UNAM" width="424" height="130" border="0"
                     longdesc="LOGOUNAM"></a></p>
-    </div>
+    </div> 
     <!--Barra de navegacion-->
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-light">
@@ -26,10 +28,10 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav justify-content-end ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#" aria-disabled="true">Inscripcion</a>
+                        <a class="nav-link" href="menu_teach.html" aria-disabled="true">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#" id="schedules" aria-disabled="true">Horarios</a>
+                        <a class="nav-link" href="#" aria-disabled="true">Laboratorios</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" data-toggle="modal" data-target="#help-window"
@@ -37,13 +39,66 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#" data-toggle="modal" data-target="#close-question"
-                            aria-disabled="true">Cerrar sesion</a>
+                            aria-disabled="true">Cerrar sesión</a>
                     </li>
                 </ul>
             </div>
         </nav>
     </div>
-    <!--Modal ayuda-->
+    <!--Modal cerrar sesion-->
+    <div class="modal" id="close-question" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    ¿Quieres cerrar sesión?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Regresar</button>
+                    <button type="button" class="btn btn-primary" id="logout-btn">Cerrar sesión</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Contenido principal-->
+    <div class="cotainer">
+        <div class="container">
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade show active" id="sec1">
+                    <a href="laboratorios.html"><button class="atras" style="float: left;"></button></a>
+                    <h3 style="text-align: center;">Tus laboratorios asignados:</h3>
+                        <!--<label style="margin-left: 74%">
+                            Clave:
+                            <input type="text">
+                        </label>
+                        <button class="clave">Buscar</button>-->
+                        <br>
+                        <table style="width: 100%" id="show_groups_form_teacher">
+                            <tr>
+                                <th>Clave</th>
+                                <th>Laboratorio</th>
+                                <th>Semestre</th>
+                                <th>CR</th>
+                                <th>Grupo</th>
+                                <th>Aula</th>
+                                <th>Profesor</th>
+                                <th>Lunes</th>
+                                <th>Martes</th>
+                                <th>Miercoles</th>
+                                <th>Jueves</th>
+                                <th>Viernes</th>
+                                <th>Sabado</th>
+                                <th>Alumnos Inscritos</th>
+                            </tr>
+                        </table>
+                        <table style="width: 100%" id="show_groups_form_teacher_2">
+                        </table><br><br>
+                        <table style="width: 100%" id="show_students_form_teacher">
+                        </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Modal ayuda -->
     <div class="modal fade" id="help-window" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -66,43 +121,11 @@
             </div>
         </div>
     </div>
-    <!--Modal cerrar sesion-->
-    <div class="modal" id="close-question" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                    ¿Quieres cerrar sesion?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Regresar</button>
-                    <button type="button" class="btn btn-primary" id="logout-btn">Cerrar sesion</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--Contenido Principal-->
-    <div class="container">
-        <div class="row">
-            <div class="col offset-md-1">
-                <h4 id="title_admin"></h4>
-                <br>
-            </div>
-        </div>
-    </div>
-    <!--Presentacion-->
-    <div class="cotainer">
-        <div class="row">
-            <div class="col offset-md-1">
-                <ul id="info_user">
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!--Espaciado discreto -->
+     <!--Espaciado discreto -->
     <div class="row">
         <div class="col-sm-12" style="color:white;">
             <br>
-            <h1> Espaciado discreto jajaja XD</h1>
+            <h1> Espaciado discreto</h1>
         </div>
     </div>
     <!--Footer con informacion-->
@@ -114,7 +137,7 @@
     </div>
     <div class="copy-right">
         <div class="container">
-            <p>© 2019 UNAM. Todos los derechos reservados | Rodrigo Hernández Olguín.</p>
+            <p>© 2019 UNAM. Todos los derechos reservados | Facultad de Estudios Superiores Cuautitlán.</p>
         </div>
     </div>
     <!--Scripts de firebase-->
@@ -144,6 +167,18 @@
         firebase.initializeApp(firebaseConfig);
         firebase.analytics();
     </script>
+<script>
+function alerta()
+    {
+    var mensaje;
+    var opcion = confirm("¿Estas seguro que deseas eliminar?");
+    if (opcion == true) {
+        mensaje = "usuario eliminado exitosamente";
+	} else {
+	    mensaje = "XD";
+	}
+    }
+</script>
     <!--Scripts de boostrap-->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -154,8 +189,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
         integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
         crossorigin="anonymous"></script>
-    <!--Scripts de personal-->
-    <script src="js/act_index_3.js"></script>
+    <!--Scripts de personal
+    -->
+    <script src="js/horarios.js"></script>
 </body>
 
 </html>

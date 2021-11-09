@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="Icon" href="img/logo_fesc.png">
+    <link rel="stylesheet" href="css/designe.css">
+    <link rel="stylesheet" href="css/designe_crud.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>Administracion de grupos</title>
+</head>
+
+<body class="bod">
+    <!--Header banner -->
+    <div class="container-fluid" style="Background-color:#003366;">
+        <p align="left"><a href="index.html"><img src="img/logounam.png" alt="UNAM" width="424" height="130" border="0"
+                    longdesc="LOGOUNAM"></a></p>
+    </div>
+    <!--Barra de navegacion-->
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav justify-content-end ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="menu_admin.html" aria-disabled="true">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="management_students.html" aria-disabled="true">Administracion de
+                            alumnos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" aria-disabled="true">Administracion de Grupos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="management_teachers.html" id="schedules"
+                            aria-disabled="true">Administracion de profesores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-toggle="modal" data-target="#close-question"
+                            aria-disabled="true">Cerrar sesión</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!--Modal cerrar sesion-->
+    <div class="modal fade" id="close-question" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    ¿Quieres cerrar sesión?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Regresar</button>
+                    <button type="button" class="btn btn-primary" id="logout-btn">Cerrar sesión</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Contenido principal-->
+    <div class="cotainer">
+        <div class="container">
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade show active" id="sec1">
+                    <a href="crud_grupos.html"><button class="atras" style="float: left;"></button></a>
+                    <h3 style="text-align: center;">Administración de laboratorios existentes</h3>
+                    <table style="width: 100%" id="group_research_table">
+
+                    </table>
+                </div>
+                <div>
+                    <br>
+                    <a href="crear_grupo.html"><button type="button" class="btn btn-primary"
+                            style="margin-left: 90%">Crear grupo</button></a>
+                </div>
+                <div class="container" id="result_group">
+                </div>
+                <div class="container" id="form_group_update">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Button trigger modal 
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+        Launch static backdrop modal
+    </button>
+-->
+    <!-- Modal -->
+  <!-- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">No hará cambios en lo que escribas</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul id="attrip_group">
+
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Entendido</button>
+                </div>
+            </div>
+        </div>
+    </div>-->
+    <!--Espaciado discreto -->
+    <div class="row">
+        <div class="col-sm-12" style="color:white;">
+            <h1> Espaciado discreto</h1>
+        </div>
+    </div>
+    <!--Footer con informacion-->
+    <div class="footer-top">
+        <div class="container-fluid">
+            <h3>Social</h3>
+            <img src="img/icons_2.png">
+        </div>
+    </div>
+    <div class="copy-right">
+        <div class="container">
+            <p>© 2019 UNAM. Todos los derechos reservados | Facultad de Estudios Superiores Cuautitlán.</p>
+        </div>
+    </div>
+    <!--Scripts de firebase-->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.1.2/firebase-firestore.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: "AIzaSyBitE7sLGG_46fV9dbp-rr8tYILcqHlOiU",
+            authDomain: "project-test-3bb76.firebaseapp.com",
+            databaseURL: "https://project-test-3bb76.firebaseio.com",
+            projectId: "project-test-3bb76",
+            storageBucket: "project-test-3bb76.appspot.com",
+            messagingSenderId: "971538913788",
+            appId: "1:971538913788:web:1f5c43d43362cd9a293a79",
+            measurementId: "G-BPZ1RBELGN"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+    </script>
+    <script>
+        function alerta() {
+            var mensaje;
+            var opcion = confirm("¿Estas seguro que deseas eliminar?");
+            if (opcion == true) {
+                mensaje = "usuario eliminado exitosamente";
+            } else {
+                mensaje = "XD";
+            }
+        }
+    </script>
+    <!--Scripts de boostrap-->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
+        integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"
+        integrity="sha384-pQQkAEnwaBkjpqZ8RU1fF1AKtTcHJwFl3pblpTlHXybJjHpMYo79HY3hIi4NKxyj"
+        crossorigin="anonymous"></script>
+    <!--Scripts de jquery-->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <!--Scripts de personal-->
+    <script src="js/show_groups.js"></script>
+</body>
+
+</html>

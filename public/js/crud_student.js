@@ -3,7 +3,7 @@ console.log("CRUD ALUMNOS");
 //crecion de los elementos FB
 const fs = firebase.firestore();
 const auth = firebase.auth();
-
+var id_goblal = "";
 //Informacion de usuario activo
 
 const local_user = {
@@ -12,7 +12,9 @@ const local_user = {
     photoUrl: "",
     uid: "",
     emailVerified: "",
-    career: ""
+    state: "",
+    career: "",
+    semester: ""
 };
 
 //recopilar informacion 
@@ -24,6 +26,8 @@ const setUser = (user) => {
         local_user.uid = user_active.uid;
         local_user.photoUrl = user_active.photoURL;
         local_user.emailVerified = user_active.emailVerified;
+        local_user.state = user_active.state;
+        local_user.semester = user_active.semester;
         showUserByEmail(local_user.email.toLowerCase());
     } else {
         local_user.name = "Unknowed";
@@ -42,8 +46,9 @@ const showUserByEmail = async (email) => {
                 local_user.name = student.Nombre;
                 local_user.career = student.Carrera;
                 local_user.account_numer = student.NumCuenta;
+                local_user.state = student.Estado;
+                local_user.semester = student.Semestre;
                 const say_N = document.querySelector('#title_admin');
-                const user_info = document.querySelector('#info_user');
                 say_N.innerHTML = `Hola ${local_user.name}`;
                 console.log("Existe usuario activo name: " + local_user.name, "Email: " + local_user.email);
             });
@@ -52,6 +57,8 @@ const showUserByEmail = async (email) => {
             console.log("Error getting documents xD: ", error);
         });
 }
+//Actualizacion de usuario (Alumno)
+const updateStudent = (id, student_up) => fs.collection("users").doc(id).update(student_up);
 
 /*Alta de un estudiante primero intentando el registro de 
 un usuario y luego manando la informacion del formulario a la DB de firestore*/
@@ -66,6 +73,7 @@ form_student_create.addEventListener('submit', (e) => {
     const career = document.querySelector("#career_form_student").value;
     const password = document.querySelector("#password_form_student").value;
     const password_c = document.querySelector("#password_2_form_student").value;
+    const semester = document.querySelector("#semester_form_student").value;
     if (password == password_c) {
         auth
             .createUserWithEmailAndPassword(email, password)
@@ -73,9 +81,11 @@ form_student_create.addEventListener('submit', (e) => {
 
                 fs.collection("users").add({
                     Nombre: name,
-                    Correo: email,
+                    Correo: email.toLowerCase(),
                     Carrera: career,
                     NumCuenta: no_account,
+                    Semestre: semester,
+                    Estado: "Ingrese un estado",
                     Tipo: 2
                 })
                     .then(function (docRef) {
@@ -83,6 +93,7 @@ form_student_create.addEventListener('submit', (e) => {
                         alert("Usuario: " + name + " ha sido registrado");
                         console.log("registrado");
                         form_student_create.reset();
+                        window.location = "index.html";
                     })
                     .catch(function (error) {
                         console.error("Error adding document: ", error);
@@ -93,11 +104,9 @@ form_student_create.addEventListener('submit', (e) => {
                 var errorCode = error.code;
                 var errorMessage = error.message;
                 if (errorCode == 'auth/email-already-in-use') {
-                    alert('El correo ya a sido utilizado');
-                    $('#singup-window').modal('hide');
+                    alert('El correo ya ha sido utilizado');
                 } else {
                     alert(errorMessage);
-                    $('#singup-window').modal('hide');
                 }
                 console.log(error);
             });
@@ -116,16 +125,19 @@ form_student_search.addEventListener('submit', async (e) => {
     fs.collection("users").where("NumCuenta", "==", no_account)
         .get()
         .then(function (querySnapshot) {
-            var val1, val2, val3, val4;
+            var val1, val2, val3, val4, val5, val6;
             querySnapshot.forEach(function (doc) {
                 // doc.data() is never undefined for query doc snapshots
                 //console.log(doc.id, " => ", doc.data());
                 var student = doc.data();
                 var id_bot = doc.id;
+                id_goblal = id_bot;
                 val1 = student.Nombre;
                 val4 = student.NumCuenta;
                 val2 = student.Carrera;
+                val6 = student.Semestre;
                 val3 = student.Correo;
+                val5 = student.Estado;
                 html_value = `
                         <form class="row g-3" id="form_student_update">
                         <div class="col-md-6"> 
@@ -135,15 +147,28 @@ form_student_search.addEventListener('submit', async (e) => {
                             <input type="number" class="form-control" id="no_cuenta_form_student_update" required>
                             <label for="carrer_form_student_update" class="form-label">Carrera</label>
                             <input type="text" class="form-control" id="career_form_student_update" required>
+                            <label for="semester_form_student_update" class="form-label">Semestre</label>
+                            <input type="text" class="form-control" id="semester_form_student_update" required>
                         </div>
                         <div class="col-md-6">
                             <label for="email_form_student_update" class="form-label">Correo electronico</label>
                             <input type="email" class="form-control" id="email_form_student_update" disabled>
+                            <label for="state_form_student_update" class="form-label">Estado</label>
+                            <input type="text" class="form-control" id="state_form_student_update" disabled>
+                            <br>
+                            <select class="form-control" id="state_form_student_update_combo" required>
+                                <option value="0" selected disabled>Ingrese un estado</option>
+                                <option value="Aceptado">Aceptado</option>
+                                <option value="Rechazado">Rechazado</option>
+                            </select>
                         </div>
-                        <br>
+                        <div class="row">
+                            <div class="col-sm-12" style="color:white;">
+                                <br><br><br>
+                            </div>
+                        </div>
                         <div class="col-12">
-                        <button class="btn btn-primary borrar_bot" data-id="${id_bot}">Eliminar</button>
-                        <button class="btn btn-secondary update_bot" data-id="${id_bot}">Editar</button>
+                        <button id="" class="btn btn-primary update_bot" data-id="${id_bot}">Actualizar</button>
                         </div>
                     </form>
                         `;
@@ -157,8 +182,102 @@ form_student_search.addEventListener('submit', async (e) => {
             account_number.value = val4;
             var career = document.querySelector("#career_form_student_update");
             career.value = val2;
+            var semester = document.querySelector("#semester_form_student_update");
+            semester.value = val6;
             var email = document.querySelector("#email_form_student_update");
             email.value = val3;
+            var state = document.querySelector("#state_form_student_update");
+            state.value = val5;
+
+            // actualizar estudiante
+            var form_update = document.querySelector("#form_student_update");
+            form_update.addEventListener('submit', async e => {
+                e.preventDefault();
+                var name = document.querySelector("#name_form_student_update");
+                var account_number = document.querySelector("#no_cuenta_form_student_update");
+                var career = document.querySelector("#career_form_student_update");
+                var semester = document.querySelector("#semester_form_student_update");
+                var email = document.querySelector("#email_form_student_update");
+                var state = document.querySelector("#state_form_student_update");//tomando el dato del input
+                //Tomando el dato del combo:
+                var combo_state = document.querySelector("#state_form_student_update_combo").value;
+                var selected_state = state;//por si no mueve el combo rescatamos el valor del input (el que ya se tenia)
+                //Se agrego en cada uno ya que no obedecia a una función aunque esta se declarará desde antes
+                
+                if (combo_state=="Aceptado") {
+                    selected_state = combo_state;
+                    await updateStudent(id_goblal, {
+                        Nombre: name.value,
+                        NumCuenta: account_number.value,
+                        Carrera: career.value,
+                        Semestre: semester.value,
+                        Correo: email.value,
+                        Estado: selected_state//va sin value si SI se selecciona algo del combo
+                    });
+                } else {
+                    if (combo_state=="Rechazado") {
+                        selected_state = combo_state;
+                        await updateStudent(id_goblal, {
+                            Nombre: name.value,
+                            NumCuenta: account_number.value,
+                            Carrera: career.value,
+                            Semestre: semester.value,
+                            Correo: email.value,
+                            Estado: selected_state//va sin value si SI se selecciona algo del combo
+                        });
+                    }else{
+                        await updateStudent(id_goblal, {
+                            Nombre: name.value,
+                            NumCuenta: account_number.value,
+                            Carrera: career.value,
+                            Semestre: semester.value,
+                            Correo: email.value,
+                            Estado: selected_state.value//va con value si NO se selecciona algo del combo
+                        });
+                    }
+                }
+                /* ESTA PARTE FUNCIONA PERO PROMEDIO A LA 3° VEZ FALLA
+                var array_combo_state = ["Aceptado","Rechazado"];
+
+                for(i=0; i<array_combo_state.length; i++){
+                    if(combo_state==array_combo_state[i]){
+                        selected_state=combo_state;
+                        updateStudent(id_goblal, {
+                            Nombre: name.value,
+                            NumCuenta: account_number.value,
+                            Carrera: career.value,
+                            Semestre: semester.value,
+                            Correo: email.value,
+                            Estado: selected_state
+                        });
+                    }else{
+                        updateStudent(id_goblal, {
+                            Nombre: name.value,
+                            NumCuenta: account_number.value,
+                            Carrera: career.value,
+                            Semestre: semester.value,
+                            Correo: email.value,
+                            Estado: selected_state.value//va con value si NO se selecciona algo del combo
+                        });
+                    }
+                }*/
+                //Esta parte igual funciona
+                /*
+                        await updateStudent(id_goblal {
+                            Nombre: name.value,
+                            NumCuenta: account_number.value,
+                            Carrera: career.value,
+                            Semestre: semester.value,
+                            Correo: email.value,
+                            Estado: selected_state.value//va con value si NO se selecciona algo del combo
+                        });*/
+
+
+
+                alert(name.value +" ha sido actualizado ");
+                form_update.reset();
+                id_goblal=null;
+            });
         })
         .catch(function (error) {
             container.innerHTML = "NO se encontraron conincidencias";

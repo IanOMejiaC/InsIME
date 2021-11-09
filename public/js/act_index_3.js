@@ -1,5 +1,5 @@
 //test conexion de script 
-console.log("Estas logeado como administrador");
+console.log("Estas en la pantalla principal de profesor");
 
 //crecion de los elementos FB
 const auth = firebase.auth();
@@ -12,14 +12,13 @@ const local_user = {
   photoUrl: "",
   uid: "",
   emailVerified: "",
-  career: ""
+  RFC: ""
 };
 
 //recopilar informacion 
 const setUser = (user) => {
   if (user) {
     var user_active = auth.currentUser;
-    //local_user.name = user_active.displayName;
     local_user.email = user_active.email;
     local_user.uid = user_active.uid;
     local_user.photoUrl = user_active.photoURL;
@@ -40,19 +39,19 @@ const showUserByEmail = async (email) => {
         //console.log(doc.id, " => ", doc.data());
         var student = doc.data();
         local_user.name = student.Nombre;
-        local_user.career = student.Carrera;
-        local_user.account_numer = student.NumCuenta;
-        console.log(local_user.name,local_user.career,local_user.account_numer);
+        local_user.RFC = student.RFC;
         const say_N = document.querySelector('#title_admin');
         const user_info = document.querySelector('#info_user');
         say_N.innerHTML = `Hola ${local_user.name}`;
         let html_value = `
-                        <li> Correo electronico ${local_user.email} </li> 
-                        <li> Carrera: ${local_user.career} </li>
-                        <li> Verifico email: ${local_user.emailVerified} </li>
-                        `;     
+                        <li class="list-group-item list-group-item-action">
+                        <h5>Correo electronico: ${local_user.email}</h5>
+                        <p>RFC: ${local_user.RFC}</p>
+                        <p>Verifico email: ${local_user.emailVerified} </p>
+                        </li>
+                        `;
         user_info.innerHTML = html_value;
-        console.log("Existe usuario activo name: " + local_user.name, "Email: " + local_user.email);
+        console.log("Existe usuario activo name: " + local_user.name, "Email: " + local_user.email, "RFC; " + local_user.RFC);
       });
     })
     .catch(function (error) {
@@ -78,7 +77,6 @@ logout.addEventListener('click', e => {
 auth.onAuthStateChanged((user) => {
   if (user) {
     setUser(user);
-    console.log("Existe usuario activo name: " + local_user.name, "Email: " + local_user.email);
     //ID Sandra("BFhfhzXQvsHLQj6t1OQO") ID Rodrigo("hL4UJEsIITomzuuykJva");
   } else {
     console.log("no hay usuario activo");

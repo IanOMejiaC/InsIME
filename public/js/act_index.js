@@ -22,7 +22,7 @@ sing_in.addEventListener('submit', (e) => {
     .then(function () {
       /* comprobacion del tipo de usuario consultando las tres colecciones de datos 
             (students, teachers, admins) y asi determinar el tipo de usuario y la pagina donde sera redirigido*/
-            fs.collection("users").where("Correo", "==", singin_email)
+            fs.collection("users").where("Correo", "==", singin_email.toLowerCase())
             .get()
             .then(function (querySnapshot) {
               querySnapshot.forEach(function (doc) {
@@ -34,7 +34,12 @@ sing_in.addEventListener('submit', (e) => {
                 }else{
                   if(user.Tipo == 2){
                     console.log(user.Nombre + " "+ "Estudiante");
-                    window.location = "menu_student.html";
+                    if(user.Estado=="Aceptado"){
+                      window.location = "menu_student.html";
+                    }else{
+                      alert("Podrás ingresar hasta que las autoridades administrativas de la carrera de IME de la FESC-C4 te de acceso");
+                    }
+  
                   }else{
                     console.log(user.Nombre + " "+ "Profesor");
                     window.location = "menu_teach.html";
@@ -60,4 +65,15 @@ sing_in.addEventListener('submit', (e) => {
       }
       console.log(error);
     });
+});
+
+//Recuperar contraseña de usuario.
+const form_recover_password = document.querySelector("#form_recover_password");
+form_recover_password.addEventListener('click', function(ev) {
+  const email_address = document.querySelector('#InputEmail1').value;
+  auth.sendPasswordResetEmail(email_address).then(function(){
+    alert("Restablecimiento de contraseña enviado");
+  }).catch(function(error){
+    alert("Asegurte de haber escrito correctamente tu correo");
+  });
 });
